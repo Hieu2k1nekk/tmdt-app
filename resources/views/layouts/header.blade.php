@@ -3,7 +3,9 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
+                            <img
+                                src="https://ampet.vn/wp-content/uploads/2022/09/Meo-tai-cup-Scottish-Fold-2.jpg"
+                                class="img-circle img-md">
                              </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong
@@ -23,32 +25,17 @@
                 </div>
             </li>
             <li class="active">
-                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Quản lý thành viên</span> <span
+                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Quản lý thành viên</span>
+                    <span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="{{ route('users.index') }}">Thành viên</a></li>
-                    <li class="active"><a href="app.blade.php">Dashboard v.2</a></li>
-                    <li><a href="dashboard_3.html">Dashboard v.3</a></li>
-                    <li><a href="dashboard_4_1.html">Dashboard v.4</a></li>
-                    <li><a href="dashboard_5.html">Dashboard v.5 </a></li>
+                    <li class="{{ request()->routeIs('users.index') ? 'active' : '' }}">
+                        <a href="{{ route('users.index') }}">Thành viên</a>
+                    </li>
                 </ul>
 
-                <a href="#"><i class="fa fa-flask"></i> <span class="nav-label">UI Elements</span><span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="typography.html">Typography</a></li>
-                    <li><a href="icons.html">Icons</a></li>
-                    <li><a href="draggable_panels.html">Draggable Panels</a></li>
-                    <li><a href="resizeable_panels.html">Resizeable Panels</a></li>
-                    <li><a href="buttons.html">Buttons</a></li>
-                    <li><a href="video.html">Video</a></li>
-                    <li><a href="tabs_panels.html">Panels</a></li>
-                    <li><a href="tabs.html">Tabs</a></li>
-                    <li><a href="notifications.html">Notifications & Tooltips</a></li>
-                    <li><a href="helper_classes.html">Helper css classes</a></li>
-                    <li><a href="badges_labels.html">Badges, Labels, Progress</a></li>
-                </ul>
-            </li>
+        </ul>
+        </li>
 
         </ul>
 
@@ -173,7 +160,8 @@
                 <li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf
-                        <button type="submit" style="background: none; border: none; color: inherit; padding: 0; cursor: pointer;">
+                        <button type="submit"
+                                style="background: none; border: none; color: inherit; padding: 0; cursor: pointer;">
                             <i class="fa fa-sign-out"></i> Log out
                         </button>
                     </form>

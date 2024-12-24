@@ -1,0 +1,10 @@
+.table th, .table td {
+    text-align: center; /* Căn giữa nội dung trong các ô */
+    vertical-align: middle; /* Căn giữa theo chiều dọc */
+    padding: 10px; /* Thêm khoảng cách bên trong ô */
+    border: 1px solid #ddd; /* Thêm đường biên */
+}
+.btn-them-user {
+    padding-bottom: 8px;
+    width: 100%;
+}

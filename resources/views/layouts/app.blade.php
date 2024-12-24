@@ -12,6 +12,7 @@
     <link href="{{ asset('template/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('template/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/css/custom.css') }}" rel="stylesheet">
 
 </head>
 

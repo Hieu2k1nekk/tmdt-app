@@ -19,79 +19,61 @@
 
         </div>
     </div>
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Basic Data Tables example with responsive plugin</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
+    <div class="table-responsive">
+        <form id="bulk-delete-form" action="{{ route('users.bulkDelete') }}" method="POST">
+            @csrf
+            <table class="table table-striped table-bordered table-hover dataTables-example">
+                <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" id="select-all">
+                    </th>
+                    <th>ID</th>
+                    <th>Ảnh</th>
+                    <th>Tên người dùng</th>
+                    <th>Email</th>
+                    <th>Vai trò</th>
+                    <th width="10%">Hành động</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($users as $user)
+                    <tr class="gradeX">
+                        <td width="2%">
+                            <input type="checkbox" name="user_ids[]" value="{{ $user->id }}">
+                        </td>
+                        <td>{{ $user->id }}</td>
+                        <td width="10%">
+                            <img src="https://ampet.vn/wp-content/uploads/2022/09/Meo-tai-cup-Scottish-Fold-2.jpg"
+                                 class="img-circle img-lg">
+                        </td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->role }}</td>
+                        <td class="center">
+                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary" title="Chỉnh sửa">
+                                <i class="fa fa-edit"></i>
                             </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#">Config option 1</a>
-                                </li>
-                                <li><a href="#">Config option 2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
+                            <!-- Form xóa riêng từng người dùng -->
+                            <form action="{{ route('users.delete', $user->id) }}" method="POST" style="display:inline;"
+                                  onsubmit="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" title="Xóa">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-danger">Xóa đã chọn</button>
+        </form>
 
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover dataTables-example" >
-                                <thead>
-                                <tr>
-                                    <<th>ID</th>
-                                    <<th>Tên người dùng</th>
-                                    <th>Email</th>
-                                    <th>Vai trò</th>
-                                    <th>Hành động</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($users as $user)
-                                <tr class="gradeX">
-                                    <td>{{ $user->id }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->role }}</td>
-                                    <td class="center">
-                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary" title="Chỉnh sửa">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-
-{{--                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">--}}
-{{--                                            @csrf--}}
-{{--                                            @method('DELETE')--}}
-{{--                                            <button type="submit" class="btn btn-danger" title="Xóa">--}}
-{{--                                                <i class="fas fa-trash-alt"></i>--}}
-{{--                                            </button>--}}
-{{--                                        </form>--}}
-                                        <form action="" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" title="Xóa">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                @endforeach
-                                </tfoot>
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
+    <div class="pagination">
+        {{ $users->links('pagination::bootstrap-4') }}
     </div>
     <div class="footer">
         <div class="pull-right">
@@ -101,4 +83,16 @@
             <strong>Copyright</strong> Example Company &copy; 2014-2017
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectAllCheckbox = document.getElementById('select-all');
+            const checkboxes = document.querySelectorAll('input[name="user_ids[]"]');
+
+            selectAllCheckbox.addEventListener('change', function () {
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                });
+            });
+        });
+    </script>
 @endsection
