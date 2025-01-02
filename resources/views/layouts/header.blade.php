@@ -25,12 +25,15 @@
                 </div>
             </li>
             <li class="active">
-                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Quản lý thành viên</span>
+                <a href="index.html"><i class="{{ config('apps.user.index.icon') }}"></i> <span class="nav-label">{{ config('apps.user.index.title') }}</span>
                     <span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li class="{{ request()->routeIs('users.index') ? 'active' : '' }}">
-                        <a href="{{ route('users.index') }}">Thành viên</a>
+                        <a href="{{ route('users.index') }}">{{ config('apps.user.index.table') }}</a>
+                    </li>
+                    <li class="{{ request()->routeIs('users.create') ? 'active' : '' }}">
+                        <a href="{{ route('users.create') }}">{{ config('apps.user.create.title') }}</a>
                     </li>
                 </ul>
 

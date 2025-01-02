@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $title = 'Quản lý thành viên';
+        $config =  config('apps.user');
         $perPage = $request->get('per_page', 20);
         $query = User::where('role', '!=', 'admin');
 
@@ -24,7 +24,7 @@ class UserController extends Controller
 
         $users = $query->paginate($perPage);
 
-        return view('users.index', compact('users', 'title'));
+        return view('users.index', compact('users', 'config'));
     }
 
     public function create()
