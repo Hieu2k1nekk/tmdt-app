@@ -25,7 +25,8 @@
                 </div>
             </li>
             <li class="active">
-                <a href="index.html"><i class="{{ config('apps.user.index.icon') }}"></i> <span class="nav-label">{{ config('apps.user.index.title') }}</span>
+                <a href="index.html"><i class="{{ config('apps.user.index.icon') }}"></i> <span
+                        class="nav-label">{{ config('apps.user.index.title') }}</span>
                     <span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -36,10 +37,21 @@
                         <a href="{{ route('users.create') }}">{{ config('apps.user.create.title') }}</a>
                     </li>
                 </ul>
-
-        </ul>
-        </li>
-
+            </li>
+            <li class="active">
+                <a href="index.html"><i class="{{ config('apps.language.index.icon') }}"></i> <span
+                        class="nav-label">{{ config('apps.language.index.title') }}</span>
+                    <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="{{ request()->routeIs('language.index') ? 'active' : '' }}">
+                        <a href="{{ route('language.index') }}">{{ config('apps.language.index.table') }}</a>
+                    </li>
+{{--                    <li class="{{ request()->routeIs('users.create') ? 'active' : '' }}">--}}
+{{--                        <a href="{{ route('users.create') }}">{{ config('apps.language.create.title') }}</a>--}}
+{{--                    </li>--}}
+                </ul>
+            </li>
         </ul>
 
     </div>

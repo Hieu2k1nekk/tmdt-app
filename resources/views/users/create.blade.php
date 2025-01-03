@@ -2,16 +2,16 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Thành viên</h2>
+            <h2>{{ $config['index']['title'] }}</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="index.html">Home</a>
                 </li>
                 <li>
-                    <a>Quản lý thành viên</a>
+                    <a>{{ $config['index']['title'] }}</a>
                 </li>
                 <li class="active">
-                    <strong>Thành viên</strong>
+                    <strong>{{ $config['index']['create'] }}</strong>
                 </li>
             </ol>
         </div>
