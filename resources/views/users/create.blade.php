@@ -11,7 +11,7 @@
                     <a>{{ $config['index']['title'] }}</a>
                 </li>
                 <li class="active">
-                    <strong>{{ $config['index']['create'] }}</strong>
+                    <strong>{{ $config['create']['title'] }}</strong>
                 </li>
             </ol>
         </div>

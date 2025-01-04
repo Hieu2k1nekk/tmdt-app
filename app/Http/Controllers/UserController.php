@@ -30,7 +30,8 @@ class UserController extends Controller
     public function create()
     {
         $title = 'Thêm mới thành viên';
-        return view('users.create', compact( 'title'));
+        $config = config('apps.user');
+        return view('users.create', compact( 'title', 'config'));
     }
 
 
