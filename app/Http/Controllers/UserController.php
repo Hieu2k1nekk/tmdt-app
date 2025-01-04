@@ -7,24 +7,24 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\CreateUserRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Services\Interfaces\UserServiceInterface as UserService;
 
 class UserController extends Controller
 {
+    protected $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
     public function index(Request $request)
     {
-        $title = 'Quản lý thành viên';
-        $perPage = $request->get('per_page', 20);
-        $query = User::where('role', '!=', 'admin');
+        $data = $this->userService->paginate($request);
 
-        // Kiểm tra nếu có từ khóa tìm kiếm
-        if ($request->has('search') && $request->get('search') != '') {
-            $search = $request->get('search');
-            $query->where('name', 'LIKE', "%{$search}%");
-        }
-
-        $users = $query->paginate($perPage);
-
-        return view('users.index', compact('users', 'title'));
+        return view('users.index', [
+            'users' => $data['users'],
+            'config' => $data['config'],
+        ]);
     }
 
     public function create()

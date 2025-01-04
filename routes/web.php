@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,12 @@ Route::group(['middleware' => 'admin'], function () {
     Route::put('users/update/{id}', [UserController::class, 'update'])->name('users.update');
     Route::delete('users/delete/{id}', [UserController::class, 'destroy'])->name('users.delete');
     Route::delete('users/bulk-delete', [UserController::class, 'bulkDelete'])->name('users.bulkDelete');
+
+    Route::get('language', [LanguageController::class, 'index'])->name('language.index');
+    Route::get('language/create', [LanguageController::class, 'create'])->name('language.create');
+    Route::post('language/create', [LanguageController::class, 'store'])->name('language.store');
+    Route::get('language/edit/{id}', [LanguageController::class, 'edit'])->name('language.edit');
+    Route::put('language/update/{id}', [LanguageController::class, 'update'])->name('language.update');
+    Route::delete('language/delete/{id}', [LanguageController::class, 'destroy'])->name('language.delete');
+    Route::delete('language/bulk-delete', [LanguageController::class, 'bulkDelete'])->name('language.bulkDelete');
 });
