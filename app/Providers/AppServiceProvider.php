@@ -16,6 +16,8 @@ class AppServiceProvider extends ServiceProvider
 {
     public $serviceBindings = [
         'App\Services\Interfaces\UserServiceInterface' => 'App\Services\UserService',
+        'App\Repositories\Interfaces\UserRepositoryInterface' => 'App\Repositories\UserRepository',
+        'App\Repositories\Interfaces\BaseRepositoryInterface' => 'App\Repositories\BaseRepository',
     ];
 
     /**

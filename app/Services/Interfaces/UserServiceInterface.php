@@ -9,4 +9,5 @@ use Illuminate\Http\Request;
 interface UserServiceInterface
 {
     public function paginate(Request $request);
+
 }
