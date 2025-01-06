@@ -35,7 +35,8 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $this->model->findOrFail($id);
     }
 
-    public function create(array $attributes)
+
+        public function create(array $attributes)
     {
         DB::beginTransaction();
         try {
@@ -55,7 +56,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     public function update($id, $attributes)
     {
 
-        $result = $this->getById($id);
+        $result = $this->model->find($id);
         if ($result) {
             DB::beginTransaction();
             try {
@@ -75,7 +76,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     public function delete($id)
     {
-        $result = $this->getById($id);
+        $result = $this->model->find($id);
         if ($result) {
 
             DB::beginTransaction();

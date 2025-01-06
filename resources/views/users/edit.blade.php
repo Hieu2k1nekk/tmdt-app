@@ -2,7 +2,7 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>{{ $config['index']['title'] }}</h2>
+            <h2>{{ ($config['index']['title']) }}</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="index.html">Home</a>
@@ -11,7 +11,7 @@
                     <a>{{ $config['index']['title'] }}</a>
                 </li>
                 <li class="active">
-                    <strong>{{ $config['index']['edit'] }}</strong>
+                    <strong>{{ $config['edit']['title'] }}</strong>
                 </li>
             </ol>
         </div>

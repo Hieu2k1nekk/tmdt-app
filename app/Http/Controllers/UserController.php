@@ -61,28 +61,27 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $title = 'Chỉnh sửa thành viên';
-        $user = User::findOrFail($id);
-        return view('users.edit', compact('user','title'));
+        $config = config('apps.user');
+        $user = $this->userRepository->find($id);
+        return view('users.edit', compact('user', 'config'));
     }
 
 
     public function update(UpdateUserRequest $request, $id)
     {
-        User::where('id', $id)->update([
+        $data = [
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
-        ]);
-
+        ];
+        $this->userRepository->update($id, $data);
         return redirect()->route('users.index')->with('success', 'Cập nhật người dùng thành công!');
     }
 
 
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
+        $this->userRepository->delete($id);
         return redirect()->route('users.index')->with('success', 'Người dùng đã được xóa thành công!');
     }
 
