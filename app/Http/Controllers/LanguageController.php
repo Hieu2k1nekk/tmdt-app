@@ -5,19 +5,28 @@ namespace App\Http\Controllers;
 use App\Services\Interfaces\LanguageServiceInterface;
 use App\Models\Language;
 use Illuminate\Http\Request;
+use App\Services\Interfaces\LanguageServiceInterface as LanguageService;
+use App\Repositories\Interfaces\LanguageRepositoryInterface as LanguageRepository;
+use Illuminate\Support\Facades\Auth;
 
 class LanguageController extends Controller
 {
     protected $languageService;
-    public function __construct(LanguageServiceInterface $languageService)
+    protected $languageRepository;
+    public function __construct(LanguageService $languageService,LanguageRepository $languageRepository)
     {
         $this->languageService = $languageService;
+        $this->languageRepository = $languageRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $languages = Language::all();
-        return view('languages.index', compact('$languages'));
+        $data = $this->languageService->paginate($request);
+
+        return view('languages.index', [
+            'languages' => $data['languages'],
+            'config' => $data['config'],
+        ]);
     }
 
     // Hiển thị form tạo ngôn ngữ mới
@@ -29,16 +38,18 @@ class LanguageController extends Controller
     // Lưu ngôn ngữ mới
     public function store(Request $request)
     {
+        $imagePath = $this->languageService->handleImageUpload($request->file('image'));
+
         $data = [
             'name' => $request->name,
             'canonical' => $request->canonical,
-            'image' => $request->image,
-            'user_id' => $request->user_id,
+            'image' => $imagePath,
+            'user_id' => Auth::id(),
 
         ];
-        $result = $this->languageService->create($data);
+        $result = $this->languageRepository->create($data);
         if ($result) {
-            return redirect()->route('languages.index')->with('success', 'Ngôn ngữ đã được lưu!');
+            return redirect()->route('language.index')->with('success', 'Ngôn ngữ đã được lưu!');
         } else {
             return redirect()->back()->with('error', 'Có lỗi xảy ra khi lưu ngôn ngữ.');
         }

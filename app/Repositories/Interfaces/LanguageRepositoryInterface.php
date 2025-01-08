@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\Interfaces;
+namespace App\Repositories\Interfaces;
 
 
-interface LanguageRepositoryInterface
+interface LanguageRepositoryInterface extends BaseRepositoryInterface
 {
-    public function paginate($request);
+
 }

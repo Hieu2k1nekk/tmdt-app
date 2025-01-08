@@ -10,6 +10,8 @@ class Language extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'languages';
+
     protected $fillable = [
         'name',
         'canonical',
@@ -17,5 +19,8 @@ class Language extends Model
         'user_id',
     ];
 
-    protected $table = 'languages';
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -36,5 +36,4 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             'config' => $config,
         ];
     }
-
 }
